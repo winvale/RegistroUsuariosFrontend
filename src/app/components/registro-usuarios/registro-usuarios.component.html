@@ -1,0 +1,80 @@
+<div class="container mt-5">
+
+    <div class="row">
+        <div class="col-lg-8 offset-lg-2">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="titulo">Registro Usuarios</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row mt-4">
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="titulo">{{accion | uppercase}} USUARIOS</h4>
+                    <form [formGroup]="form" (ngSubmit)="agregarUsuario()">
+                        <div class="input-group input-group-lg mb-3">
+                            <span  class="input-group-text" >
+                                <i class="fas fa-user" 
+                                [class.green-icon]="this.form.get('nombre')?.valid"
+                                [class.red-icon]="this.form.get('nombre')?.invalid && this.form.get('nombre')?.touched "></i>  
+                            </span>
+                            <input formControlName="nombre" type="text" class="form-control" placeholder="Nombre">
+                        </div>
+                        <div class="input-group input-group-lg mb-3">
+                            <span  class="input-group-text" >
+                                <i class="fas fa-id-card" [class.green-icon]="this.form.get('cedula')?.valid"
+                                [class.red-icon]="this.form.get('cedula')?.invalid && this.form.get('cedula')?.touched "></i></span>
+                            <input maxlength="15" formControlName="cedula" type="text" class="form-control" placeholder="Cedula">
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-7">
+                                <div class="input-group input-group-lg mb-3">
+                                    <span  class="input-group-text" >
+                                        <i class="fas fa-envelope" [class.green-icon]="this.form.get('correo')?.valid"
+                                        [class.red-icon]="this.form.get('correo')?.invalid && this.form.get('correo')?.touched "></i></span>
+                                    <input formControlName="correo" type="text" class="form-control" placeholder="Correo">
+                                </div>
+                            </div>
+                            
+                                <div class="col-lg-5">
+                                    <div class="input-group input-group-lg mb-3">
+                                        <span  class="input-group-text" >
+                                            <i class="fas fa-circle" [class.green-icon]="this.form.get('edad')?.valid"
+                                            [class.red-icon]="this.form.get('edad')?.invalid && this.form.get('edad')?.touched "></i></span>
+                                        <input formControlName="edad" type="text" class="form-control" placeholder="Edad">
+                                    </div>
+                                </div>
+                          <button [disabled]="this.form.invalid"  type="submit"  class="btn btn-success ">Guardar</button> 
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="titulo">Listado de Usuarios</h4>
+                        <table class="table">
+                            <tbody>
+                                <tr *ngFor="let registros of ListaUsuarios; ">
+                                    <td>{{registros.nombre}}</td>
+                                    <td>{{registros.cedula}}</td>
+                                    <td>{{registros.correo}}</td>
+                                    <td>{{registros.edad}}</td>
+                                    <td>
+                                        <i (click)="editarUsuario(registros)" class="fa-solid fa-pen-to-square"></i></td>
+                                    <td>
+                                        <i (click)="eliminarUsuario" class="far fa-trash-alt"></i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
